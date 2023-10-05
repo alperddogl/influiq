@@ -6,7 +6,9 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
+  Linking
 } from "react-native";
+
 import { ApikeyContext, ScriptsContext } from "../Context";
 import { colorPalette, styles } from "../Style";
 import { Text, Input, Icon, Switch, Divider, Card } from "@rneui/themed";
@@ -155,8 +157,16 @@ export default function Library({ navigation }) {
           size={50}
         />
       </TouchableOpacity>
-      <Text style={styles.h1}>Made By Alper</Text>
       <View style={{ height: 200 }} />
+      <TouchableOpacity onPress={() => Linking.openURL('http://devalper.com')}
+ style={{ borderRadius:20,
+      backgroundColor:colorPalette.blue,
+      alignContent:"center",
+      alignItems:"center",
+      alignSelf:"center" }} >
+      <Text style={{    fontSize: 20,
+    fontWeight: "bold",    color: colorPalette.white, padding:10 }}>Made By Alper</Text>
+</TouchableOpacity>
     </ScrollView>
   );
 }
