@@ -67,25 +67,7 @@ export default function Library({ navigation }) {
 
   return (
     <ScrollView style={styles.view}>
-      <View style={styles.card}>
-        <View style={{ padding: 15, alignItems: "center" }}>
-          <Text style={styles.h1}>Api Key</Text>
-        </View>
 
-        <View style={styles.topicContainer}>
-          <Divider width={20} />
-          <Input
-            textAlign="center"
-            secureTextEntry={true}
-            inputContainerStyle={{ borderBottomWidth: 0 }}
-            containerStyle={styles.input}
-            inputStyle={styles.text}
-            placeholder="Enter your API key here"
-            onChangeText={(apikey) => setApikey(apikey)}
-            value={apikey}
-          />
-        </View>
-      </View>
       {scripts.map((script, index) => (
         <View key={index} style={styles.card}>
           <TouchableOpacity

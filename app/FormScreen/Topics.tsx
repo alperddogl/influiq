@@ -7,7 +7,6 @@ import {
   UIManager,
 } from "react-native";
 import {
-  Button,
   CheckBox,
   Input,
   Switch,
@@ -19,7 +18,6 @@ import {
 import axios from "axios";
 import { colorPalette, styles } from "../Style";
 import { CategoryContext, TopicContext, ApikeyContext } from "../Context";
-import { DarkTheme } from "@react-navigation/native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -32,7 +30,6 @@ if (
 ) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-const MAX_TOKENS = 50;
 
 export default function Topic() {
   const [topics, setTopics] = useState([]);
@@ -40,8 +37,7 @@ export default function Topic() {
   const [selectedTopic, setSelectedTopic] = useState("");
   const { category } = useContext(CategoryContext);
   const { topic, setTopic } = useContext(TopicContext);
-  const { apikey } = useContext(ApikeyContext);
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0.7);
   const translateY = useSharedValue(500);
 
   useEffect(() => {
@@ -65,32 +61,32 @@ export default function Topic() {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setShowTopics(!showTopics);
   };
-  const createTopic = async () => {
-    if (category.length < 1 || category.length > MAX_TOKENS) {
-      throw new Error("Invalid category");
-    }
 
-    const prompt = `Generate a YouTube video topic idea in  ${category} category: [Generated topic idea, max characters=50]`;
 
-    const response = await axios.post(
-      "https://api.openai.com/v1/completions",
-      {
-        model: "text-davinci-003",
-        prompt: prompt,
-        max_tokens: MAX_TOKENS,
-        temperature: value,
+
+const createTopic = async () => {
+
+  const prompt = `Generate a YouTube video topic idea in  ${category} category: [Generated topic idea, max characters=50]`;
+
+  const response = await axios.post(
+'https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyBEu13nMBwpTnJzEuijDBG7G2suBuIrifg',
+
+    {
+      prompt: {text:prompt},
+      max_output_tokens: 50,
+      temperature: value,
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
       },
-      {
-        headers: {
-          Authorization: `Bearer ${apikey}`,
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    },
+  );
 
-    return response.data.choices[0].text.trim().replace(/"/g, "");
-  };
 
+  return response.data.candidates[0].output.replace(/["*]/g, "");
+
+};
   const addNewTopic = async () => {
     try {
       const newTopic = await createTopic();
@@ -136,7 +132,7 @@ export default function Topic() {
               <Slider
                 value={value}
                 onValueChange={(val) => setValue(Math.round(val * 10) / 10)}
-                maximumValue={1.5}
+                maximumValue={1}
                 minimumValue={0}
                 step={0.1}
                 allowTouchTrack

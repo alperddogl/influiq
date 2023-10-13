@@ -35,7 +35,6 @@ export default function Calculate({ navigation }) {
   const { category } = useContext(CategoryContext);
   const { randomness } = useContext(RandomnessContext);
   const { maxtokens } = useContext(MaxTokensContext);
-  const { apikey } = useContext(ApikeyContext);
   const translateX = useSharedValue(300);
 
   useEffect(() => {
@@ -66,22 +65,22 @@ export default function Calculate({ navigation }) {
     Generate a YouTube video script with provided information : [Generated script idea, max characters=${maxtokens}]`;
 
     const response = await axios.post(
-      "https://api.openai.com/v1/completions",
-      {
-        model: "text-davinci-003",
-        prompt: prompt,
-        max_tokens: maxtokens,
-        temperature: randomness,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${apikey}`,
-          "Content-Type": "application/json",
-        },
-      },
-    );
-
-    return response.data.choices[0].text.trim().replace(/"/g, "");
+      'https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyBEu13nMBwpTnJzEuijDBG7G2suBuIrifg',
+      
+          {
+            prompt: {text:prompt},
+            max_output_tokens: maxtokens,
+            temperature: randomness,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+      
+      
+      return response.data.candidates[0].output.replace(/["*]/g, "");
   };
 
   const [isLoading, setIsLoading] = useState(false);

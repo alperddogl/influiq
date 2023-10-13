@@ -5,7 +5,7 @@ import { colorPalette, styles } from "../Style";
 import { RandomnessContext } from "../Context";
 
 export default function Randomness() {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0.7);
   const { randomness, setRandomness } = useContext(RandomnessContext);
   React.useEffect(() => {
     setRandomness(value);
@@ -20,7 +20,7 @@ export default function Randomness() {
           <Slider
             value={value}
             onValueChange={(val) => setValue(Math.round(val * 10) / 10)}
-            maximumValue={1.5}
+            maximumValue={1}
             minimumValue={0}
             step={0.1}
             allowTouchTrack
