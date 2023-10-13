@@ -51,24 +51,29 @@ export default function Script({ navigation }) {
                 onBackdropPress={toggleDialog5}
                 overlayStyle={styles.cardY}
               >
-                <View style={{flexDirection:"row", }}>
-                <TouchableOpacity
-                  onLongPress={() => navigation.navigate("Library")}
-                  style={{
-                    backgroundColor: colorPalette.black,
-                    borderRadius: 50,
-                    alignSelf: "flex-start",
-                  }}
-                >
-                  <Icon
-                    name="delete"
-                    type="material-icons"
-                    iconStyle={{ color: colorPalette.red }}
-                    style={{ margin: 5 }}
-                  />
-                </TouchableOpacity>
-                <Text  style={{ fontWeight:"400", fontSize:14, marginLeft:10 }}>Hold to {'\n'}discard</Text>
-                </View><View
+                <View style={{ flexDirection: "row" }}>
+                  <TouchableOpacity
+                    onLongPress={() => navigation.navigate("Library")}
+                    style={{
+                      backgroundColor: colorPalette.black,
+                      borderRadius: 50,
+                      alignSelf: "flex-start",
+                    }}
+                  >
+                    <Icon
+                      name="delete"
+                      type="material-icons"
+                      iconStyle={{ color: colorPalette.red }}
+                      style={{ margin: 5 }}
+                    />
+                  </TouchableOpacity>
+                  <Text
+                    style={{ fontWeight: "400", fontSize: 14, marginLeft: 10 }}
+                  >
+                    Hold to {"\n"}discard
+                  </Text>
+                </View>
+                <View
                   style={{ flexDirection: "row", justifyContent: "center" }}
                 >
                   <TouchableOpacity

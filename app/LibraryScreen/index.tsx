@@ -6,7 +6,7 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
-  Linking
+  Linking,
 } from "react-native";
 
 import { ApikeyContext, ScriptsContext } from "../Context";
@@ -67,7 +67,6 @@ export default function Library({ navigation }) {
 
   return (
     <ScrollView style={styles.view}>
-
       {scripts.map((script, index) => (
         <View key={index} style={styles.card}>
           <TouchableOpacity
@@ -117,8 +116,11 @@ export default function Library({ navigation }) {
                     borderRadius={50}
                   />
                 </TouchableOpacity>
-                <Text  style={{ fontWeight:"400", fontSize:14, marginLeft:10 }}>Hold to {'\n'}discard</Text>
-
+                <Text
+                  style={{ fontWeight: "400", fontSize: 14, marginLeft: 10 }}
+                >
+                  Hold to {"\n"}discard
+                </Text>
               </View>
             </Animated.View>
           )}
@@ -140,15 +142,27 @@ export default function Library({ navigation }) {
         />
       </TouchableOpacity>
       <View style={{ height: 200 }} />
-      <TouchableOpacity onPress={() => Linking.openURL('http://devalper.com')}
- style={{ borderRadius:20,
-      backgroundColor:colorPalette.blue,
-      alignContent:"center",
-      alignItems:"center",
-      alignSelf:"center" }} >
-      <Text style={{    fontSize: 20,
-    fontWeight: "bold",    color: colorPalette.white, padding:10 }}>Made By Alper</Text>
-</TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => Linking.openURL("http://devalper.com")}
+        style={{
+          borderRadius: 20,
+          backgroundColor: colorPalette.blue,
+          alignContent: "center",
+          alignItems: "center",
+          alignSelf: "center",
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            color: colorPalette.white,
+            padding: 10,
+          }}
+        >
+          Made By Alper
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }

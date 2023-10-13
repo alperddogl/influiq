@@ -62,31 +62,26 @@ export default function Topic() {
     setShowTopics(!showTopics);
   };
 
+  const createTopic = async () => {
+    const prompt = `Generate a YouTube video topic idea in  ${category} category: [Generated topic idea, max characters=50]`;
 
+    const response = await axios.post(
+      "https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyBEu13nMBwpTnJzEuijDBG7G2suBuIrifg",
 
-const createTopic = async () => {
-
-  const prompt = `Generate a YouTube video topic idea in  ${category} category: [Generated topic idea, max characters=50]`;
-
-  const response = await axios.post(
-'https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyBEu13nMBwpTnJzEuijDBG7G2suBuIrifg',
-
-    {
-      prompt: {text:prompt},
-      max_output_tokens: 50,
-      temperature: value,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
+      {
+        prompt: { text: prompt },
+        max_output_tokens: 50,
+        temperature: value,
       },
-    },
-  );
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
 
-
-  return response.data.candidates[0].output.replace(/["*]/g, "");
-
-};
+    return response.data.candidates[0].output.replace(/["*]/g, "");
+  };
   const addNewTopic = async () => {
     try {
       const newTopic = await createTopic();

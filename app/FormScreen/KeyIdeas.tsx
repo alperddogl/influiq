@@ -79,23 +79,21 @@ export default function Key() {
     topic: ${topic}
     Generate a key point to use inside of the video with provided information : [Generated Key point, max characters=50]`;
     const response = await axios.post(
-      'https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyBEu13nMBwpTnJzEuijDBG7G2suBuIrifg',
-      
-          {
-            prompt: {text:prompt},
-            max_output_tokens: 50,
-            temperature: value,
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          },
-        );
-      
-      
-        return response.data.candidates[0].output.replace(/["*]/g, "");
-      
+      "https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=AIzaSyBEu13nMBwpTnJzEuijDBG7G2suBuIrifg",
+
+      {
+        prompt: { text: prompt },
+        max_output_tokens: 50,
+        temperature: value,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    return response.data.candidates[0].output.replace(/["*]/g, "");
   };
 
   const addNewKey = async () => {
